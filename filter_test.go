@@ -1,4 +1,4 @@
-package filter
+package gofilter
 
 import (
 	"testing"
@@ -23,9 +23,9 @@ func TestSetIntFilter(t *testing.T) {
 	}
 
 	var intFilter func([]int, func(int) bool) []int
-	err := Set(&intFilter)
+	err := SetFilter(&intFilter)
 	if err != nil {
-		t.Fatalf("filter.Set: %v", err)
+		t.Fatalf("gofilter.SetFilter: %v", err)
 	}
 
 	got := intFilter(isEvenTest.in, isEven)
@@ -48,9 +48,9 @@ func TestSetFloat32Filter(t *testing.T) {
 	}{[]float32{4, 4.5, 5, 5.5, 6, 6.5, 7}, []float32{5.5, 6, 6.5, 7}}
 
 	var float32Filter func([]float32, func(float32) bool) []float32
-	err := Set(&float32Filter)
+	err := SetFilter(&float32Filter)
 	if err != nil {
-		t.Fatalf("filter.Set: %v", err)
+		t.Fatalf("gofilter.SetFilter: %v", err)
 	}
 
 	got := float32Filter(isGreaterThan5Test.in, isGreaterThan5)

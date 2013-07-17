@@ -1,11 +1,19 @@
-package filter
+package gofilter
 
 import (
 	"errors"
 	"reflect"
 )
 
-func Set(filter interface{}) error {
+/*
+SetFilter stores a function where filter points to. When filter is called afterwards,
+it filters a slice by applying a predicate on each element. The returned slice will
+consist of the elements where the predicate returned true.
+filter must be a pointer to a function of type func([]A, func(A) bool) []A,
+e.g. func([]int, func(int) bool) []int. SetFilter will use the type information
+to create a matching filter function.
+*/
+func SetFilter(filter interface{}) error {
 
 	pointerValue := reflect.ValueOf(filter)
 	if pointerValue.Kind() != reflect.Ptr {
